@@ -315,6 +315,8 @@ bintray {
     publish = true
     dryRun = (findProperty('dryRun') ?: 'true').toBoolean()
 
+    println buildDir
+
     if (findProperty('bintrayUseExisting')) {
         filesSpec {
             from "$buildDir/libs"
