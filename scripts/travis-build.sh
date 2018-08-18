@@ -4,6 +4,8 @@ set -xeuo pipefail
 
 pwd
 
+cat ~/.gradle/gradle.properties
+
 main() {
     ENV=development
 
