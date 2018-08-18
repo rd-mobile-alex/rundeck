@@ -1,6 +1,8 @@
 #!/bin/bash
 
-set -euo pipefail
+set -xeuo pipefail
+
+pwd
 
 main() {
     ENV=development
