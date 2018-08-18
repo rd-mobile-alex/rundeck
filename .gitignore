@@ -15,6 +15,7 @@
 **/*/out
 makeenv
 /artifacts
+/ci-resources
 /cobertura.ser
 /gradle-cache
 /rundeckapp/stacktrace.log

@@ -22,7 +22,7 @@ source scripts/helpers.sh
 
 ## Overrides: Should be commented out in master
 # RUNDECK_BUILD_NUMBER="3347"
-# RUNDECK_TAG="v3.0.0-alpha4"
+RUNDECK_TAG="v3.0.2"
 
 export RUNDECK_BUILD_NUMBER="${RUNDECK_BUILD_NUMBER:-$TRAVIS_BUILD_NUMBER}"
 export RUNDECK_COMMIT="${RUNDECK_COMMIT:-$TRAVIS_COMMIT}"

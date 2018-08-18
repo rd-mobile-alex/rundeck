@@ -8,14 +8,14 @@ services:
 - docker
 
 stages:
-- name: build
-  if: fork = false
-- name: test
-  if: fork = false
-- name: snapshot release
-  if: fork = false AND type = push AND (branch = master OR env(RUNDECK_RELEASE) IS present) AND tag IS blank
+# - name: build
+#   if: fork = false
+# - name: test
+#   if: fork = false
+# - name: snapshot release
+#   if: fork = false AND type = push AND (branch = master OR env(RUNDECK_RELEASE) IS present) AND tag IS blank
 - name: tag release
-  if: fork = false AND type = push AND tag =~ ^v
+  # if: fork = false AND type = push AND tag =~ ^v
 - name: fork
   if: fork = true
 
@@ -147,6 +147,7 @@ jobs:
     script:
     - script_block 'sync-artifacts' fetch_common_artifacts
     - script_block 'sync.ci-resources' fetch_common_resources
+    - ls -lah rundeckapp/build/libs
     - export VCS_URL=https://github.com/rundeck/rundeck.git
 
     # Deploy new snapshot packages
@@ -154,7 +155,7 @@ jobs:
     # - bash scripts/deploy-rpm-snapshots.sh "${BINTRAY_USER}" "${BINTRAY_API_KEY}" rundeck "${BINTRAY_RPM_REPO}"
     # - bash scripts/deploy-maven-snapshots.sh "${BINTRAY_USER}" "${BINTRAY_API_KEY}" rundeck "${BINTRAY_MAVEN_REPO}" "${RUNDECK_BUILD_NUMBER}"
     # Upload to sonatype
-    - script_block 'publish.maven' 'DRY_RUN=false bash scripts/travis-build.sh publish'
+    - script_block 'publish.maven' 'DRY_RUN=true bash scripts/travis-build.sh publish'
 
   # Stage: fork consolidates all tests into one job.
   # Forks do not have access to encrypted envars so we can't pass artifacts between jobs/stages.
@@ -188,6 +189,7 @@ branches:
     - release-2.11
     - prerelease-2.12.0
     - /^v.*/
+    - bintray-debug
 
 notifications:
   irc:
